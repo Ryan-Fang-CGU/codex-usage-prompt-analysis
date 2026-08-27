@@ -1,0 +1,22 @@
+{
+  "n": 2798,
+  "tp": 557,
+  "fp": 16,
+  "fn": 120,
+  "tn": 2105,
+  "accuracy": 0.9513938527519656,
+  "precision": 0.9720767888307156,
+  "recall": 0.8227474150664698,
+  "f1": 0.8912,
+  "accuracy_95_ci": [
+    0.9419115377632534,
+    0.9602649006622517
+  ],
+  "f1_95_ci": [
+    0.8702652884764085,
+    0.9105183641152423
+  ],
+  "prompt_count": 435,
+  "metric_name": "mixed_reference_agreement",
+  "interpretation": "Agreement with human plus dual-AI consensus labels; not independent human-test accuracy."
+}
