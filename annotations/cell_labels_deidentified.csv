@@ -1,4 +1,4 @@
-sample_id,sample_group,label_type,label,chatgpt_label,doubao_label,human_label,mixed_reference,reference_source,regex_prediction,reference_internal_label,included_in_evaluation
+﻿sample_id,sample_group,label_type,label,chatgpt_label,doubao_label,human_label,mixed_reference,reference_source,regex_prediction,reference_internal_label,included_in_evaluation
 P0001,一般代表樣本,領域,醫學領域,,,否,否,人工金標,否,否,是
 P0001,一般代表樣本,領域,工程領域,,,是,是,人工金標,是,否,是
 P0001,一般代表樣本,領域,商業領域,,,否,否,人工金標,否,否,是
@@ -5999,4 +5999,3 @@ P0500,一般代表樣本,任務,其他任務,否,是,,,未解決,否,否,否
 P0500,一般代表樣本,內部提示,Codex內部提示,否,否,,否,雙AI共識,否,否,是
 P0500,一般代表樣本,領域,數學領域,否,否,,否,雙AI共識,,否,否
 P0500,一般代表樣本,任務,教材編寫,是,否,,,未解決,,否,否
-
