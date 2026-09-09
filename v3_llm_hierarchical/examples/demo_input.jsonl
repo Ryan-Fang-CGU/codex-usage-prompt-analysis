@@ -1,0 +1,3 @@
+{"id":"demo-001","prompt":"請用 Python 分析肌肉實驗資料，整理成 Excel，並製作 PowerPoint 簡報。","prompt_tokens":1200,"completion_tokens":600,"total_tokens":1800,"account_hash":"demo-user-a"}
+{"id":"demo-002","prompt":"我的 MySQL 查詢很慢，請找出後端 API 的效能問題並修正。","prompt_tokens":900,"completion_tokens":500,"total_tokens":1400,"account_hash":"demo-user-b"}
+
