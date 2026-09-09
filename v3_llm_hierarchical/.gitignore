@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+成果/*
+!成果/.gitkeep
+*.inspect.ndjson
+.env
+
