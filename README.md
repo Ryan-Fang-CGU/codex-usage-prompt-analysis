@@ -1,4 +1,49 @@
-# Codex Prompt 使用分類與混合參考驗證
+# Codex Prompt 使用分類：正式版 v1.4 與歷史驗證
+
+## 正式交接版本（2026-09-21）
+
+目前正式分析採用 v1.4「單一大項＋單一小項」混合式語意分類，不使用正則表達式判定正式類別，也沒有進行 fine-tuning。完整資料涵蓋23個ZIP、120,543筆去重請求；264筆沒有非空白Prompt，另外120,279筆請求均已連結正式類別。相同Prompt去重後共有33,666個語意標籤。
+
+正式交接檔案不含Prompt原文、回覆內容、帳號、Email、學號或API金鑰：
+
+```text
+handoff/
+  request_id_category.csv        # 120,543筆；兩欄，直接和金額表用request_id串接
+  prompt_sha256_category.csv     # 33,666筆；兩欄，無request_id時用內容SHA-256串接
+  processing_exceptions.csv      # 空白Prompt、合成ID、解析／重複／未分類狀態及原因
+  pipeline_audit_summary.json    # 全量處理數量與例外定義
+formal_v1_4/
+  taxonomy/classification_v1.4.json
+  src/formal_v14_batch_classifier.py
+  src/semantic_knn_completion.py
+  src/export_collaborator_handoff.py
+```
+
+`category`欄格式為`大項 > 小項`。`request_id_category.csv`保留全部去重請求；空白Prompt標為`未分類 > 空白 Prompt`，沒有默默丟棄。23筆來源紀錄沒有request_id，稽核時使用`archive.zip:member.json`合成識別碼；若另一份資料沒有相同合成ID，應改用`prompt_sha256_category.csv`串接。
+
+### 正式分類方法
+
+- 第一階段以正式v1.4分類表進行語意分類，保留30,129個Luna標籤與13個gpt-oss標籤。
+- 第二階段對其餘3,524個唯一Prompt使用BGE-M3語意向量，依平衡抽取的既有語意標籤進行k近鄰補全。
+- 最終每個非空白Prompt只有一個大項及一個小項；內部提示仍保留`is_internal_prompt`品質旗標，但不建立獨立用途大項。
+- 正式結果沒有剩餘的非空白未分類資料。API過程中的暫時逾時若最後取得分類，不算最終失敗。
+
+### 全量稽核結果
+
+| 狀態 | 筆數 |
+|---|---:|
+| ZIP | 23 |
+| JSON紀錄 | 120,543 |
+| 去重請求 | 120,543 |
+| 已分類請求 | 120,279 |
+| 空白Prompt | 264 |
+| 非空白但未分類 | 0 |
+| JSON解析失敗 | 0 |
+| 損壞ZIP | 0 |
+| 重複request_id | 0 |
+| 缺少request_id而使用合成ID | 23 |
+
+以下「正則分類與混合參考驗證」是早期研究版本，保留供方法比較，不是目前全量正式分類器。
 
 本專案使用純正則表達式與關鍵字規則，將 Codex Prompt 分成多個領域與任務類別，並以「人工金標＋ChatGPT／豆包逐格共識」建立混合參考標注，評估規則分類器的表現。
 

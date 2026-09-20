@@ -6,3 +6,13 @@ venv/
 Thumbs.db
 *.inspect.ndjson
 previews/
+.env
+*.env
+*.duckdb
+*.db
+vendor/
+data/
+raw_data/
+*.zip
+*prompt_text*
+*原始Prompt*
